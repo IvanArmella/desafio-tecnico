@@ -30,7 +30,7 @@ export class TareaController {
     }
 
     @UseGuards(JwtAutGuard)
-    @Get("/:tareaId")
+    @Get("/buscar/:tareaId")
     async buscarTarea(@Res() res,@Param("tareaId") tareaId) {
         const tarea=await this.tareaService.buscarTarea(tareaId);
         return res.status(HttpStatus.OK).json({
