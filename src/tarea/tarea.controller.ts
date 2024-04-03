@@ -30,6 +30,16 @@ export class TareaController {
     }
 
     @UseGuards(JwtAutGuard)
+    @Get("/:tareaId")
+    async buscarTarea(@Res() res,@Param("tareaId") tareaId) {
+        const tarea=await this.tareaService.buscarTarea(tareaId);
+        return res.status(HttpStatus.OK).json({
+            message:'Tarea recuperada con exito.',
+            tarea
+        })
+    }
+
+    @UseGuards(JwtAutGuard)
     @Get("/misTareas")
     async buscarMisTareas(@Res() res,@Request() req){
         const tareas=await this.tareaService.buscarTareas(req.user.id);
